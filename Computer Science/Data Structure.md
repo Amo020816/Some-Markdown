@@ -74,7 +74,7 @@ We hope to find that when the input size $N\ \rightarrow\ \infty$, how $T(N)$ gr
 ##  Mathematical Background
 It is a theoretical issue to analyse the resource use of an algorithm and therefore a formal framework is required.
 
-### Definition
+### Definitions
 
 There are four important mathematical definitions:
 
@@ -127,7 +127,7 @@ if $T_1(N) = O(f(N))$ and $T_2(N) = O(g(N))$, then
 1. $$T_1(N) + T_2(N)\ =\ O(f(N) + g(N))$$ 
  ( intuitively and less formally it is $O(max(f(N), g(N)))$). 
  2. $$T_1(N) * T_2(N)\ =\ O(f(N)*g(N))$$
-#### Rule 2
+##### Rule 2
 if $f(N) = O(g(N))$ and $g(N) = O(h(N))$ , then$f(n)\ =\ O(h(N))$
 
 ##### Rule 3
@@ -183,7 +183,9 @@ As an example, we shall consider this problem:
 
 # Lists
 ## (Java version)
+>(refer to https://joshhug.gitbooks.io/hug61b/content/chap2)
 ### IntList
+
 First we build up the most basic list class.
 ``` Java
 public class IntList {
@@ -240,7 +242,7 @@ It's natural we know that when `rest` is `null`, the list just contains a single
 
 <mark>Here is a question</mark>: why don't we do something like `if (this == null) return 0;` instead.
 
-Answer: Think about what happens when we call `size`. We are calling it on an objest, for example, `L.size()`. If L were `null`, then NullPointer error results.
+<mark>Answer</mark>: Think about what happens when we call `size`. We are calling it on an objest, for example, `L.size()`. If L were `null`, then NullPointer error results.
 
 Next is `iterativeSize` method:
 ``` Java
@@ -258,4 +260,141 @@ public int iterativeSize() {
 
 We needs a pointer because we can't reassign `this` in Java.
 
-Notice that 
+Note that both `size` and `iterativeSize` take linear time which is $T(N)\  =\  \Theta(N)$.  It's too slow for a huge list.
+
+It's high time that we should delve deeper into the list and improve it.
+
+### SLList
+
+In the last section, we built the `IntList` class, a list data structure that can technically do all the things a list can do.
+
+However, in practice, it is too awkward for users to use, resulting in code that is hard to read and maintain.
+
+Alternatively, it also leaves the data unsafe, because all the `Node`s of the list are public. 
+
+Third, in order to use `IntList` correctly, the programmer must understand and utilize recursion even for simple list related tasks.
+
+Next we'll build a new class `SLList` (Singly-linked List), which much more closely resembles the implementations.
+
+#### Review IntList
+
+We can easily notice that our class `IntList` acutally is not a real list. It is more like a `Node` in a list, where `first` is data or objects and `rest` is the next node indeed.
+
+So, we can rename the `IntList` and its member variables and throw away all the helper methods:
+
+``` Java
+public class IntNode {
+    public int item;
+    public IntNode next;
+
+    public IntNode(int i, IntNode n) {
+        item = i;
+        next = n;
+    }
+}
+```
+
+#### Black-Box it
+
+Knowing that `IntNode` is hard to use, we are going to put `IntNode` into a black box. That is, we leave `IntNode` behind the scene and users can not interact with it. 
+
+The only thing `IntNode` needs to deal with is to store some necessary information for us.
+
+Thus, we need another interface for users to interact with this black box. We're going to create a sperate class named `SLList` for users.
+
+The basic class is shown below:
+``` Java
+public class SLList {
+    public IntNode first;
+
+    public SLList(int x) {
+        first = new IntNode(x, null);
+    }
+}
+```
+
+Compare the creation of an `IntList` of one item and the creation of a `SLList` :
+``` Java
+IntList L1 = new IntList(5, null);
+SLList L2  = new SLList(5);
+```
+
+The `SLList` hides the detail that there exists a null link from the user. We sucessfully put the complex implementation of create a `List` into a black box.
+
+Yet our `SLList` lacks of some helper methods.
+
+#### addFirst and getFirst
+
+`addFirst` is straightforward:
+``` JAVA
+    /** Adds an item to the front of the list. **/
+    public void addFirst(int x) {
+        first = new IntNode(x, first);
+    }
+```
+
+Just like we did  `L = new IntList((something), L);` in the last section.
+
+`getFirst` is much easier:
+``` Java
+/** Retrieves the front item from the list. */
+public int getFirst() {
+    return first.item;
+}
+```
+
+The resulting `SLList` is much easier to use. Compare:
+``` Java
+SLList L = new SLList(15);
+L.addFirst(10);
+L.addFirst(5);
+int x = L.getFirst();
+```
+
+to the  `IntList` :
+``` Java
+IntList L = new IntList(15, null);
+L = new IntList(10, L);
+L = new IntList(5, L);
+int x = L.first;
+```
+
+> refer to https://joshhug.gitbooks.io/hug61b/content/chap2/chap22.html
+![[IntList_vs_SLList.png]]
+
+In `SLList`, we put the `Node`s behind the `SLList` class.
+
+>Essentially, the `SLList` class acts as a middleman between the list user and the naked recursive data structure.
+
+The resulting class not only is much easier to grasp and use, but also provide a possibility to make the data safe.
+
+#### Private data member
+
+Till this moment, our data is still exposed to outer world. A programmer can easily modify the `Node`s directly, where some unexpected errors may occur.
+
+Check this:
+``` Java
+SLList L = new SLList(15);
+L.addFirst(10);
+L.first.next.next = L.first.next;
+```
+
+> refer to https://joshhug.gitbooks.io/hug61b/content/chap2/chap22.html
+> ![[bad_SLList.png]]
+> This results in a malformed list with an infinite loop.
+
+How to solve this problem?
+
+The most resonable way is to make our `first` data member private, i.e.
+
+``` Java
+public class SLList {
+    private IntNode first;
+...
+```
+
+Private variables and methods can only be accessed by codes inside the same class.
+
+
+
+
