@@ -183,7 +183,7 @@ As an example, we shall consider this problem:
 
 # Lists
 ## (Java version)
->(refer to https://joshhug.gitbooks.io/hug61b/content/chap2)
+>(reference to https://joshhug.gitbooks.io/hug61b/content/chap2)
 ### IntList
 
 First we build up the most basic list class.
@@ -359,7 +359,7 @@ L = new IntList(5, L);
 int x = L.first;
 ```
 
-> refer to https://joshhug.gitbooks.io/hug61b/content/chap2/chap22.html
+> reference to https://joshhug.gitbooks.io/hug61b/content/chap2/chap22.html
 ![[IntList_vs_SLList.png]]
 
 In `SLList`, we put the `Node`s behind the `SLList` class.
@@ -379,7 +379,7 @@ L.addFirst(10);
 L.first.next.next = L.first.next;
 ```
 
-> refer to https://joshhug.gitbooks.io/hug61b/content/chap2/chap22.html
+> reference to https://joshhug.gitbooks.io/hug61b/content/chap2/chap22.html
 > ![[bad_SLList.png]]
 > This results in a malformed list with an infinite loop.
 
@@ -393,8 +393,34 @@ public class SLList {
 ...
 ```
 
-Private variables and methods can only be accessed by codes inside the same class.
+>Private variables and methods can only be accessed by codes inside the same .java file.
 
+Private keyword makes our data safer, and
 
+>In large software engineering projects, the `private` keyword is an invaluable signal that certain pieces of code should be ignored (and thus need not be understood) by the end user.
+
+#### Nested class
+At the moment, we have two `.java` files: `IntNode` and `SLList`. However, the `IntNode` is just a supporting characteristic in `SLList`.
+
+In this situation, we can embed `IntNode` class into the `SLList` class.
+
+``` Java
+public class SLList {
+       public class IntNode {
+            public int item;
+            public IntNode next;
+            public IntNode(int i, IntNode n) {
+                item = i;
+                next = n;
+            }
+       }
+
+       private IntNode first; 
+
+       public SLList(int x) {
+           first = new IntNode(x, null);
+       } 
+...
+```
 
 
