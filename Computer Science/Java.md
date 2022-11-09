@@ -1,10 +1,19 @@
 # Overview
-This artical is mainly about the difference between C++ and Java or some new characteristics apeared in Java.
+This note is mainly about the difference between C++ and Java or some new characteristics appeared in Java.
 
 # Data Types
+
+## Introduction
+
 There are some data types in both C++ and Java.
 
 Most of them have little differences, instead of arrays and strings.
+
+There are <b>nine</b> different data types in Java. Eight of them are primitive data type, such as int, double, boolean and e.t.c..
+
+And the last data type is called reference type.
+
+We first look into String.
 
 ## String
 

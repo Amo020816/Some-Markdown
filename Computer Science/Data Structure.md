@@ -20,12 +20,12 @@ As we discussed above, different needs (or problems) lead to different data stru
 
 > An algorithm is a clearly specified set of simple instructions to be followed to solve a problem.
 
-More intuitively, an algorithm is a effective method of operating the data in order to get the correct(or satisifying) outputs.
+More intuitively, an algorithm is a effective method of operating the data in order to get the correct(or satisfying) outputs.
 
 ## Learn more about algorithm.
 Consider an example.
 
-There are serveral methods for humans to calculate multiplication.
+There are several methods for humans to calculate multiplication.
 
 - Chinese method
 基于九九乘法表，运用竖式运算。
@@ -126,7 +126,7 @@ When we say that $T(N) = O(f(N))$, we are guaranteeing that the function $T(N)$ 
 if $T_1(N) = O(f(N))$ and $T_2(N) = O(g(N))$, then
 1. $$T_1(N) + T_2(N)\ =\ O(f(N) + g(N))$$ 
  ( intuitively and less formally it is $O(max(f(N), g(N)))$). 
- 2. $$T_1(N) * T_2(N)\ =\ O(f(N)*g(N))$$
+ 2. $$T_1(N)\ *\ T_2(N)\ =\ O(f(N)\ *\ g(N))$$
 ##### Rule 2
 if $f(N) = O(g(N))$ and $g(N) = O(h(N))$ , then$f(n)\ =\ O(h(N))$
 
@@ -137,11 +137,11 @@ If $T(N)$ is a polynomial of degree $k$, then $T(N) = \Theta(N^k)$
 $log^kN = O(N)$ for any constant $k$. <mark>This tells us that logarithms grow very slowly.</mark>
 
 ### By calculating limit
-We can always determine the ralative growth rates of two functions $f(N)$ and $g(N)$ by computing
+We can always determine the relative growth rates of two functions $f(N)$ and $g(N)$ by computing
 $$
 \lim_{N\to \infty} \frac{f(N)}{g(N)}
 $$
-, using L\`Hopital's law if necessary.
+, using L\`Hospital's law if necessary.
 
 The limit can have four possible values:
 - The limit is 0  : $f(N)\ = \ o(g(N))$
@@ -176,8 +176,8 @@ Average-case performance often reflects typical behavior, while worst-case perfo
 ##
 As an example, we shall consider this problem:
 
-### Maxium Subsequence Sum problem
-> Given (possibly negative) integers  $A_1,\ A_2,\ \dots\  ,A_N$, find the maxium value of $\sum_{k=i}^j A_k$.
+### Maximum Subsequence Sum problem
+> Given (possibly negative) integers  $A_1,\ A_2,\ \dots\  ,A_N$, find the maximum value of $\sum_{k=i}^j A_k$.
 
 
 
@@ -294,7 +294,7 @@ public class IntNode {
 }
 ```
 
-#### Black-Box it
+#### Encapsulate
 
 Knowing that `IntNode` is hard to use, we are going to put `IntNode` into a black box. That is, we leave `IntNode` behind the scene and users can not interact with it. 
 
