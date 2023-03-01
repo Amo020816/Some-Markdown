@@ -16,7 +16,7 @@ Some classical data structures : lists, trees, graphs .....
 ## What is algorithm?
 Then it leads to the second question : What is algorithm?
 
-As we discussed above, different needs (or problems) lead to different data structures. ==The final goal is to solve the typical problems.==
+As we discussed above, different needs (or problems) lead to different data structures. ==The final goal is to solve the practical problems.==
 
 > An algorithm is a clearly specified set of simple instructions to be followed to solve a problem.
 
@@ -134,7 +134,7 @@ if $f(N) = O(g(N))$ and $g(N) = O(h(N))$ , then$f(n)\ =\ O(h(N))$
 If $T(N)$ is a polynomial of degree $k$, then $T(N) = \Theta(N^k)$
 
 ##### Rule 4
-$log^kN = O(N)$ for any constant $k$. <mark>This tells us that logarithms grow very slowly.</mark>
+$log^kN = O(N)$ for any constant $k$. ==This tells us that logarithms grow very slowly.==
 
 ### By calculating limit
 We can always determine the relative growth rates of two functions $f(N)$ and $g(N)$ by computing
@@ -242,7 +242,7 @@ It's natural we know that when `rest` is `null`, the list just contains a single
 
 <mark>Here is a question</mark>: why don't we do something like `if (this == null) return 0;` instead.
 
-<mark>Answer</mark>: Think about what happens when we call `size`. We are calling it on an objest, for example, `L.size()`. If L were `null`, then NullPointer error results.
+**Solution**: Think about what happens when we call `size`. We are calling it on an objest, for example, `L.size()`. If L were `null`, then NullPointer error occurs.
 
 Next is `iterativeSize` method:
 ``` Java
