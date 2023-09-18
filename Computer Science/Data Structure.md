@@ -16,7 +16,7 @@ Some classical data structures : lists, trees, graphs .....
 ## What is algorithm?
 Then it leads to the second question : What is algorithm?
 
-As we discussed above, different needs (or problems) lead to different data structures. ==The final goal is to solve the practical problems.==
+As we discussed above, different needs (or problems) lead to different data structures. ==The final goal is to solve practical problems.==
 
 > An algorithm is a clearly specified set of simple instructions to be followed to solve a problem.
 
@@ -55,18 +55,18 @@ There are two criteria to judge whether an algorithm is good enough.
 
 Naturally, we can arise several questions:
 - How to estimate the time required for a program
-- How to reduce the running thime of a program from days or years to fractions of a second.
+- How to reduce the running time of a program from days or years to fractions of a second.
 
 ## Asymptotic Algorithm Analysis
 In this method, we focus on
-- Critical resources (Time and Space)
+- Critical resources (Time and Space) i.e CPU and Memory
 - Factors affecting running time
-- For most algorithms, running time depends on "<b>size</b>" of the input
-Runing time is expressed as $T(n)$ for some function $T$ on input size $n$.
+- For most algorithms, running time depends on =="**size**"== of the input
+Running time is expressed as $T(n)$ for some function $T$ on input size $n$.
 
 Given two functions, there are always points where one function is smaller than the other. So it does not make sense to claim , for instance, $f(N) < g(N)$.
 
-Thus, only the <mark><b>ralative rates of growth</b></mark> is meaningful.
+Thus, only the ==**relative rates of growth**== is meaningful.
 
 We hope to find that when the input size $N\ \rightarrow\ \infty$, how $T(N)$ grows.
 
@@ -207,7 +207,7 @@ L.rest = new IntList(10, null);
 L.rest.rest = new IntList(15, null);
 ```
 
-Alternativly, we can build the list backwards.
+Alternatively, we can build the list backwards.
 ``` java
 IntList L = new IntList(15, null);
 L = new IntList(10, L);
@@ -240,7 +240,7 @@ In the case, to get the base case, we first consider what do we know about the s
 
 It's natural we know that when `rest` is `null`, the list just contains a single element, where the size is 1.
 
-<mark>Here is a question</mark>: why don't we do something like `if (this == null) return 0;` instead.
+<mark>Here is a question</mark>: why don't we choose something like `if (this == null) return 0;` instead.
 
 **Solution**: Think about what happens when we call `size`. We are calling it on an objest, for example, `L.size()`. If L were `null`, then NullPointer error occurs.
 
@@ -424,3 +424,6 @@ public class SLList {
 ```
 
 
+
+
+straightforward
